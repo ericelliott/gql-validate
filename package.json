@@ -1,0 +1,45 @@
+{
+  "name": "gql-validate",
+  "version": "1.0.0",
+  "description": "Validate a JS object against a GraphQL schema",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --fix . && echo 'Lint complete.'",
+    "ci-lint": "eslint .",
+    "watch-test": "node -r esm src/index-test.js",
+    "test": "node -r esm src/index-test.js && npm run -s ci-lint",
+    "watch": "watch 'clear && npm run -s watch-test | tap-nirvana && npm run -s lint' src",
+    "debug": "node -r esm --inspect-brk src/index-test.js",
+    "build-docs": "scripts/build-docs.sh",
+    "typecheck": "tsc --rootDir . src/index-test.js --allowJs --checkJs --noEmit --esModuleInterop --lib es6 --jsx react && echo 'TypeScript check complete.'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericelliott/gql-validate.git"
+  },
+  "keywords": [],
+  "author": "Eric Elliott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ericelliott/gql-validate/issues"
+  },
+  "homepage": "https://github.com/ericelliott/gql-validate#readme",
+  "devDependencies": {
+    "@types/node": "12.6.6",
+    "eslint": "6.0.1",
+    "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-jsdoc": "15.5.2",
+    "eslint-plugin-prettier": "3.1.0",
+    "jsdoc-to-markdown": "5.0.0",
+    "prettier": "1.18.2",
+    "riteway": "6.0.3",
+    "tap-nirvana": "1.1.0",
+    "typescript": "3.5.3",
+    "watch": "1.0.2"
+  },
+  "dependencies": {
+    "esm": "3.2.25",
+    "graphql-to-json-schema": "1.0.0",
+    "immer": "3.1.3"
+  }
+}
