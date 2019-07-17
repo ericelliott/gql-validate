@@ -2,7 +2,8 @@
   "name": "gql-validate",
   "version": "1.0.0",
   "description": "Validate a JS object against a GraphQL schema",
-  "main": "src/index.js",
+  "main": "index.js",
+  "module": "src/index.js",
   "scripts": {
     "lint": "eslint --fix . && echo 'Lint complete.'",
     "ci-lint": "eslint .",
