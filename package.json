@@ -1,6 +1,6 @@
 {
   "name": "gql-validate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validate a JS object against a GraphQL schema",
   "main": "index.js",
   "module": "src/index.js",
