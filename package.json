@@ -29,7 +29,7 @@
     "@types/node": "12.7.3",
     "eslint": "6.3.0",
     "eslint-config-prettier": "6.1.0",
-    "eslint-plugin-jsdoc": "15.8.3",
+    "eslint-plugin-jsdoc": "15.8.4",
     "eslint-plugin-prettier": "3.1.0",
     "jsdoc-to-markdown": "5.0.0",
     "prettier": "1.18.2",
