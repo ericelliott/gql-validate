@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ericelliott/gql-validate#readme",
   "devDependencies": {
-    "@types/node": "12.12.9",
+    "@types/node": "12.12.11",
     "eslint": "6.6.0",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-jsdoc": "15.12.2",
