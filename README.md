@@ -39,7 +39,7 @@ validate(schema, rootType)(invalidPerson);
 // ]
 ```
 
-By default `validate` understands the native [GraphQL scalars](https://graphql.org/learn/schema/#scalar-types). It expects `ID` to be [cuids](https://github.com/ericelliott/cuid). See `configureGqlValidate` for supporting custom types or to change the validation of existing types.
+By default `validate` understands the native [GraphQL scalars](https://graphql.org/learn/schema/#scalar-types). By default ID is just a string, so there is no validation for uniqueness. See `configureGqlValidate` for supporting custom types or to change the validation of existing types.
 
 
 ## API
