@@ -1,6 +1,6 @@
 import { describe } from "riteway";
 
-import validate from "./index.js";
+import validate from "./validate.js";
 
 describe("validate", async assert => {
   {
