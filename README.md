@@ -1,16 +1,18 @@
 # gql-validate
 
-Validate a JS object against a GraphQL schema
+Validate a JS object against a GraphQL schema using [yup](https://github.com/jquense/yup) for validation.
 
 
 ## Status - Developer Preview
 
-Currently, this only checks that required properties are present. It does not check that the type of each property is correct, nor does it run custom validations for user-created types.
+Currently, this checks that required properties are present, handles the GraphQL primitives and supports custom types. Arrays suffer from [this yup bug](https://github.com/jquense/yup/issues/725). You have to implement nested objects as custom types. See [`custom-types-test.js`](./src/custom-types-test.js) for examples.
 
 
 ## Usage
 
 ```js
+import { gqlValidate } from 'gql-validate';
+
 const rootType = 'Person';
 const schema = `
   type ${rootType} {
@@ -29,9 +31,9 @@ const invalidPerson = {
   knowsJS: "Yes"
   age: 10.5,
 };
-validate(schema, rootType, validPerson);
+gqlValidate(schema, rootType, validPerson).then(console.log);
 // []
-validate(schema, rootType)(invalidPerson);
+gqlValidate(schema, rootType)(invalidPerson).then(console.log);
 // [
 //   "'name' is required",
 //   "'knowsJS' must be of type boolean, received string",
@@ -50,7 +52,7 @@ Validate a JavaScript object against a GraphQL schema. This function is curried.
 
 Supported features: GraphQL scalars and required.
 
-**Returns**: <code>Array</code> - An array of errors.  
+**Returns**: <code>Promise< Array ></code> - A promise with an array of errors.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -59,7 +61,7 @@ Supported features: GraphQL scalars and required.
 | data | <code>object</code> | The object to validate. |
 
 
-### configureGqlValiadte(config) => <code>validate</code>
+### configureGqlValidate(config) => <code>validate</code>
 
 Configure the validation methods for the default and custom types for the `validate` function.
 
@@ -67,29 +69,27 @@ Configure the validation methods for the default and custom types for the `valid
 
 | Param | Type | Description |
 | --- | --- | --- |
-| config | <code>object</code> | A object which keys represent the type and value represent the validation object. The validation object must expose a `.validate()` method which takes in the key and its value and returns an array containing the error or an empty array. |
+| config | <code>object</code> | A object which keys represent the type and value represent the validation object. The validation object must expose keys which are yup objects and correspond to your custom GraphQL type. |
 
 #### Usage
 
 ```js
-const LongString = { 
-  validate: (key, value) => typeof value === 'string' && value.length > 10
-    ? []
-    : [`'${key}' must be long string`]
-};
-const config = { LongString };
+import configureGqlValidate from 'gql-validate';
+
+const Email = yup.string().strict().email();
+const config = { Email };
 const validate = configureGqlValidate(config);
 
 const rootType = 'Message';
 const schema = `
   type ${rootType} {
-    content: LongString!
+    from: Email!
   }
 `;
-const validMessage = { content: "I'm long enough." };
-const invalidMessage = { content: 'Too short.' };
-valiadate(schema, rootType, validMessage);
+const validMessage = { from: "foo@example.com" };
+const invalidMessage = { from: 'Bob' };
+valiadate(schema, rootType, validMessage).then(console.log);
 // []
-validate(schema, rootType, invalidMessage);
-// ["'content' must be a long string"]
+validate(schema, rootType, invalidMessage).then(console.log);
+// ["from must be a valid email"]
 ```

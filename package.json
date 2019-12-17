@@ -36,11 +36,13 @@
     "riteway": "6.1.1",
     "tap-nirvana": "1.1.0",
     "typescript": "3.7.3",
-    "watch": "1.0.2"
+    "watch": "1.0.2",
+    "web3-utils": "1.2.4"
   },
   "dependencies": {
     "esm": "3.2.25",
     "graphql-to-json-schema": "1.0.0",
-    "immer": "3.3.0"
+    "immer": "3.3.0",
+    "yup": "0.28.0"
   }
 }
