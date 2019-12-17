@@ -123,7 +123,7 @@ describe("gqlValidate(): no config", async assert => {
     assert({
       given: "an empty schema with any object",
       should: "return an empty array",
-      actual: gqlValidate(emptySchema, rootType, obj),
+      actual: await gqlValidate(emptySchema, rootType, obj),
       expected: []
     });
   }
