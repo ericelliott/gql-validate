@@ -46,7 +46,7 @@ By default `validate` understands the native [GraphQL scalars](https://graphql.o
 
 ## API
 
-### validate(gqlSchema, rootType, data) ⇒ <code>Array</code>
+### validate(gqlSchema, rootType, data) ⇒ <code>Promise< Array ></code>
 
 Validate a JavaScript object against a GraphQL schema. This function is curried.
 
