@@ -69,7 +69,7 @@ Configure the validation methods for the default and custom types for the `valid
 
 | Param | Type | Description |
 | --- | --- | --- |
-| config | <code>object</code> | A object which keys represent the type and value represent the validation object. The validation object must expose keys which are yup objects and correspond to your custom GraphQL type. |
+| config | <code>object</code> | The keys of the validation object represent the GraphQL type. The values must be yup objects. |
 
 #### Usage
 

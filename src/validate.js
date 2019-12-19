@@ -13,16 +13,25 @@ const migrate = schema =>
 const getPropRules = ({ definitions }, rootType) =>
   Object.entries(definitions[rootType].properties);
 
-const handleType = (config, type, required, ref, items) => {
+/**
+ *
+ * @param {object} arguments - The arguments for handle type.
+ * @param {object} arguments.config - The configuration containing each type and how to yup should handle it.
+ * @param {string} arguments.type - The type.
+ * @param {boolean} arguments.required - Whether the key is required.
+ * @param {string} arguments.$ref - A string from which we can read custom types.
+ * @param {object} arguments.items - An optional key that arrays have which gives information about its content.
+ * @returns {object} YupObject - A yupObject.
+ */
+const handleType = ({ config, type, required, $ref, items }) => {
   if (type === "array") {
-    const { type: t, $ref, required: req, items: i } = items.type;
-    const schema = handleType(config, t, req, $ref, i);
+    const schema = handleType({ config, ...items.type });
     const array = config[type].of(schema);
     return required ? array.required() : array;
   }
 
   if (!type) {
-    const customType = ref.substring(14);
+    const customType = $ref.substring(14);
     if (config[customType]) {
       if (typeof config[customType].resolve !== "function") {
         throw new Error(`${customType} must be a yup validator.`);
@@ -43,7 +52,7 @@ const buildYupObjectFromSchema = (config, schema, rootType) =>
     getPropRules(schema, rootType).reduce(
       (shape, [key, { type, required, $ref, items }]) => ({
         ...shape,
-        [key]: handleType(config, type, required, $ref, items)
+        [key]: handleType({ config, type, required, $ref, items })
       }),
       {}
     )
