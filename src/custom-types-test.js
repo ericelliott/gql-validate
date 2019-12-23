@@ -1,7 +1,7 @@
 import { describe, Try } from "riteway";
 
 import { Email, EthereumAddress, TokenData } from "./custom-types.js";
-import configureGqlValidate from "./validate.js";
+import configureGqlValidate from "./index.js";
 
 describe("gqlValidate(): with valid custom types", async assert => {
   const config = { Email, EthereumAddress };

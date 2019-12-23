@@ -1,6 +1,6 @@
 import { describe, Try } from "riteway";
 
-import { gqlValidate } from "./validate.js";
+import { gqlValidate } from "./index.js";
 
 describe("gqlValidate(): no config", async assert => {
   const rootType = "Person";
