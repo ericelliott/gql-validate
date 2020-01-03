@@ -60,13 +60,19 @@ describe("gqlValidate(): with array", async assert => {
     type ${rootType} {
       message: String!
       numbers: [Int!]!
+      strings: [String!]!
       tokens: [TokenData!]!
     }
   `;
 
   {
     const token = { name: "foo", id: "123" };
-    const validObj = { message: "hello", numbers: [4], tokens: [token] };
+    const validObj = {
+      message: "bar",
+      numbers: [4],
+      tokens: [token],
+      strings: ["foo"]
+    };
 
     assert({
       given: "a valid object",
@@ -77,13 +83,17 @@ describe("gqlValidate(): with array", async assert => {
   }
 
   {
-    const invalidObj = { message: "hello", numbers: [], tokens: [] };
+    const invalidObj = { message: "foo", numbers: [], tokens: [], strings: [] };
 
     assert({
       given: "an invalid object (empty array)",
       should: "return an array containing the corresponding error",
       actual: await validate(schema, rootType, invalidObj),
-      expected: ["numbers is a required field", "tokens is a required field"]
+      expected: [
+        "numbers is a required field",
+        "strings is a required field",
+        "tokens is a required field"
+      ]
     });
   }
 
@@ -91,20 +101,19 @@ describe("gqlValidate(): with array", async assert => {
     const invalidObj = {
       message: "hello",
       numbers: ["hello"],
+      strings: [1],
       tokens: [{ name: 1, id: true }]
     };
 
     assert({
-      given: "an invalid object (empty array)",
+      given: "an invalid object (wrong types)",
       should: "return an array containing the corresponding error",
       actual: await validate(schema, rootType, invalidObj),
-      /*
-      There are errors missing here for getting the type of name and id
-      wrong. This is a bug from yup.
-      See: https://github.com/jquense/yup/issues/725.
-      */
       expected: [
-        'numbers[0] must be a `number` type, but the final value was: `NaN` (cast from the value `"hello"`).'
+        'numbers[0] must be a `number` type, but the final value was: `"hello"`.',
+        "strings[0] must be a `string` type, but the final value was: `1`.",
+        "tokens[0].name must be a `string` type, but the final value was: `1`.",
+        "tokens[0].id must be a `string` type, but the final value was: `true`."
       ]
     });
   }

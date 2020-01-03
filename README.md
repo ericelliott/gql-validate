@@ -5,7 +5,7 @@ Validate a JS object against a GraphQL schema using [yup](https://github.com/jqu
 
 ## Status - Developer Preview
 
-Currently, this checks that required properties are present, handles the GraphQL primitives and supports custom types. Arrays suffer from [this yup bug](https://github.com/jquense/yup/issues/725). You have to implement nested objects as custom types. See [`custom-types-test.js`](./src/custom-types-test.js) for examples.
+Currently, this checks that required properties are present, handles the GraphQL primitives and supports custom types. You have to implement nested objects as custom types. See [`custom-types-test.js`](./src/custom-types-test.js) for examples.
 
 
 ## Usage

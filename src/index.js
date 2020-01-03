@@ -26,7 +26,7 @@ const getPropRules = ({ definitions }, rootType) =>
 const handleType = ({ config, type, required, $ref, items }) => {
   if (type === "array") {
     const schema = handleType({ config, ...items.type });
-    const array = config[type].of(schema);
+    const array = config[type].of(schema).strict();
     return required ? array.required() : array;
   }
 
