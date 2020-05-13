@@ -35,7 +35,7 @@
     "prettier": "1.19.1",
     "riteway": "6.1.2",
     "tap-nirvana": "1.1.0",
-    "typescript": "3.8.3",
+    "typescript": "3.9.2",
     "watch": "1.0.2",
     "web3-utils": "1.2.7"
   },
