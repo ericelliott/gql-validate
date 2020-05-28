@@ -42,7 +42,7 @@
   "dependencies": {
     "esm": "3.2.25",
     "graphql-to-json-schema": "1.0.0",
-    "immer": "3.3.0",
+    "immer": "6.0.9",
     "yup": "0.29.1"
   }
 }
