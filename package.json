@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/node": "12.12.62",
     "eslint": "6.8.0",
-    "eslint-config-prettier": "6.11.0",
+    "eslint-config-prettier": "6.12.0",
     "eslint-plugin-jsdoc": "15.12.2",
     "eslint-plugin-prettier": "3.1.4",
     "jsdoc-to-markdown": "5.0.3",
