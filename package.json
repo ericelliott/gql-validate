@@ -33,7 +33,7 @@
     "eslint-plugin-prettier": "3.1.4",
     "jsdoc-to-markdown": "5.0.3",
     "prettier": "1.19.1",
-    "riteway": "6.2.0",
+    "riteway": "6.2.1",
     "tap-nirvana": "1.1.0",
     "typescript": "3.9.7",
     "watch": "1.0.2",
